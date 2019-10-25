@@ -1,0 +1,306 @@
+<div *lg class="play" style="height:900px;width:100%; overflow-y: scroll">
+  <div class="cf pa2">
+    <div class="fl w-15 dib w-10-m w-20-l pa2">
+      <img src="{{tempPhoto}}" alt="Onwos"
+        class="w-100 dib outline black-10" />
+    </div>
+    <span class=" dib  mt4">
+      <button nz-button class="dib  " style="" [nzSize]="'large'" nzType="link">
+        <span class="black f1">{{userObj.uname}}</span>
+      </button>
+      <button *ngIf="!homeuser && !fan"  nz-button class="dib " (click)="addFan()" nzShape="round" nzType="primary">Follow</button>
+      <button *ngIf="!homeuser && fan" nz-button class="dib " (click)="addFan()" nzShape="round" nzType="primary">&#10004; Following</button>
+      <div class="f2 fw6 pl3">{{fans}} <span class="black-40 fw4">followers</span></div>
+      <div class=" pl3 pt3 ">
+        <div class="black-70 f3 fw6 text-break">Bio</div>
+        <div class="f4 fw6 black-40 w-80 text-break"  style="overflow-wrap: break-word;white-space: pre-wrap;">{{userObj.bio}}</div>
+      </div>
+      <div *ngIf="homeuser" class=" pl3 f3  pt4">
+        <button  (click)="showModalMiddle()" nz-button nzType="default"><i nz-icon class="f3" nzType="edit"></i>Edit</button>
+      </div>
+
+    </span>
+    <div class="ma3">
+      <div style="width: 100%" class="fw6 bb  b--moon-gray dib pr2  pb1 mb2">
+        <span class="dib f2 pr3">Shows</span>
+        <button *ngIf="homeuser" (click)="showCreate()" nz-button class="dib fr " [nzSize]="'large'" nzShape="round"
+          nzType="primary">
+          + Create Show
+        </button>
+      </div>
+
+      <div class="mt2">
+        <nz-card [nzTitle]="title" class="dib" nzHoverable *ngFor="let sug of userShowObjArr" nzTitle={{sug.title}}
+          style="width: 337px;height: 500px">
+          <img alt="example" routerLink="/show/{{sug.showid}}" src="http://localhost:3000{{sug.poster}}" height="400px"
+            width="100%" />
+          <ng-template #title>
+            <nz-avatar [nzSize]="45" class="ba b--black-20" nzSrc="{{tempPhoto}}"></nz-avatar>
+            <span class="pl2" routerLink="/show/{{sug.showid}}">{{sug.title}}</span>
+          </ng-template>
+        </nz-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div *md class="play" style="height:900px;width:100%;; overflow-y: scroll">
+  <div class="pa2">
+    <div class="fl w-15 dib w-10-m w-20-l pa2">
+      <img src="{{tempPhoto}}" alt="Onwos" style="width: 100%;height: auto" class="outline black-10" />
+    </div>
+    <span class=" dib ">
+      <button nz-button class="dib v-mid " style="margin-bottom: 11%" [nzSize]="'large'" nzType="link">
+        <span class="black f1">{{userObj.uname}}</span>
+      </button>
+      <button *ngIf="!homeuser && !fan" nz-button class="dib " (click)="addFan()" nzShape="round"
+        nzType="primary">Follow</button>
+      <button *ngIf="!homeuser && fan" nz-button class="dib " (click)="addFan()" nzShape="round"
+        nzType="primary">&#10004; Following</button>
+      <div class="f2 fw6 pl3">{{fans}} <span class="black-40 fw4">fans</span></div>
+      <div class=" pl3 pt3">
+        <div class="black-70 f3 fw6 text-break">Bio</div>
+        <div class="f4 fw6 black-40 w-100" style="overflow-wrap: break-word;white-space: pre-wrap;">{{userObj.bio}}
+        </div>
+      </div>
+      <div *ngIf="homeuser" class=" pl3 f3  pt4">
+        <button (click)="showModalMiddle()" nz-button nzType="default"><i nz-icon class="f3"
+            nzType="edit"></i>Edit</button>
+      </div>
+
+    </span>
+    <div class="mt2">
+      <div style="width: 100%" class="fw6 bb  b--moon-gray dib pr2  ">
+        <div class="dib f2 ">Shows</div>
+        <button *ngIf="homeuser" (click)="showCreate()"
+        nz-button class="dib fr " [nzSize]="'default'" nzShape="round"
+          nzType="primary">
+          + Create Show
+        </button>
+      </div>
+
+      <div class="mt2 tc" style="width:100%">
+        <nz-card [nzTitle]="title" class="tc" nzHoverable *ngFor="let sug of userShowObjArr" nzTitle={{sug.title}}
+          style="width: 337px;height: 500px">
+          <img alt="example" routerLink="/show/{{sug.showid}}" src="http://localhost:3000{{sug.poster}}" height="400px"
+            width="100%" />
+          <ng-template #title>
+            <nz-avatar [nzSize]="45" class="ba b--black-20" nzSrc="{{tempPhoto}}"></nz-avatar>
+            <span class="pl2" routerLink="/show/{{sug.showid}}">{{sug.title}}</span>
+          </ng-template>
+        </nz-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--update-->
+<nz-modal *lg nz [nzFooter]="footer" nzWrapClassName="vertical-top-modal" [(nzVisible)]="isVisibleMiddle"
+      nzTitle="Edit"  nzWidth="400" (nzOnCancel)="handleCancelMiddle()" (nzOnOk)="handleOkMiddle()">
+      <div class="w-100 tl pa2">
+
+        <img  src="{{tempPhoto}}" alt="{{userObj.uname}}"
+          class="w-100  dib outline black-10" />
+
+        <form class="form-group">
+          <label for="file" style="border-radius:5px" class="dim pointer bg-blue white fw5 pa2 pr3 pl3 w-100 tc">
+            Change Profile Photo
+          </label>
+          <input style="display: none" type="file" accept="image/x-png,image/gif,image/jpeg" id="file" (change)="getNewPhoto($event)">
+        </form>
+        </div>
+      <div class=" ml2 mt2 w-95">
+        <div class="black-40 f5 fw6 pb2  mt1">Username</div>
+        <input nz-input #uname placeholder="{{userObj.uname}}" nzSize="default" />
+        <div class="black-40 f5 fw6 pb2  mt2">Bio</div>
+        <textarea nz-input #bio placeholder="{{userObj.bio}}"
+          [nzAutosize]="{ minRows: 2, maxRows: 4 }"></textarea>
+      </div>
+      <ng-template #footer class="tc w-100">
+        <div *ngIf="!startUpdate" (click)="changeProfile(uname.value,bio.value)" class="pointer dim bg-blue pa1 pl2 pr2 fw6 f4 white br-pill tc">Update</div>
+        <div *ngIf="startUpdate" class="blue  fw6  f5 tc w-100 pt3">Updating</div>
+        <nz-progress *ngIf="startUpdate" [nzPercent]="percentup" class="w-100 pb2" nzStatus="active"></nz-progress>
+        <div *ngIf="updated" class="green pl2  f5 tc w-100 pt3">Updated Successfully</div>
+        <nz-progress *ngIf="updated" [nzPercent]="100" class=" fw6 pl2 w-90 tc pb2" ></nz-progress>
+      </ng-template>
+
+</nz-modal>
+
+<nz-modal *md [nzFooter]="footer" nz nzWrapClassName="vertical-top-modal" [(nzVisible)]="isVisibleMiddle" nzTitle="Edit" nzWidth="300"
+  (nzOnCancel)="handleCancelMiddle()" (nzOnOk)="handleOkMiddle()">
+  <div class="w-100 tl pa2">
+
+    <img src="{{tempPhoto}}" alt="{{userObj.uname}}" class="w-100  dib outline black-10" />
+
+    <form class="form-group">
+      <label for="file" style="border-radius:5px" class="dim f6 pointer bg-blue white fw5 pa2 pr3 pl3 w-100 tc">
+        Change Profile Photo
+      </label>
+      <input style="display: none" type="file" id="file" (change)="getNewPhoto($event)">
+    </form>
+    <div (click)="changeProfile()">upload</div>
+  </div>
+  <div class=" ml2 mt2 w-90">
+    <div class="black-40 m1">Username</div>
+    <input nz-input #uname placeholder="{{userObj.uname}}" nzSize="default" />
+    <div class="black-40 mt1">Bio</div>
+            <textarea nz-input #bio placeholder="{{userObj.bio}}" [nzAutosize]="{ minRows: 2, maxRows: 4 }"></textarea>
+  </div>
+  <ng-template #footer class="tc w-100">
+    <div *ngIf="!startUpdate" (click)="changeProfile(uname.value,bio.value)"
+      class="pointer dim bg-blue pa1 pl2 pr2 fw6 f4 white br-pill tc">Update</div>
+    <div *ngIf="startUpdate" class="blue  fw6  f5 tc w-100 pt3">Updating</div>
+    <nz-progress *ngIf="startUpdate" [nzPercent]="percentup" class="w-100 pb2" nzStatus="active"></nz-progress>
+    <div *ngIf="updated" class="green pl2  f5 tc w-100 pt3">Updated Successfully</div>
+    <nz-progress *ngIf="updated" [nzPercent]="100" class=" fw6 pl2 w-90 tc pb2"></nz-progress>
+  </ng-template>
+</nz-modal>
+
+
+<!--create-->
+<nz-modal *lg nz [nzFooter]="footer" nzWrapClassName="vertical-top-modal" [(nzVisible)]="visibleCreate" nzTitle="Create Show"
+  nzWidth="1050" class="tc" (nzOnCancel)="cancelCreate()" (nzOnOk)="okCreate()">
+  <div style="width: 48% ;" class=" dib ">
+    <div class=" f4 fw6 mb2">Show Poster</div>
+    <div class="ba b--black-10">
+          <img src="{{createPhoto}}" height="500px" width="auto" alt="Upload Poster" class="dib outline black-10" />
+          <form class="form-group">
+            <label for="file" style="border-radius:5px" class="dim pointer bg-blue white fw5 pa2 pr3 pl3 w-100 tc">
+              Upload Show's Poster
+            </label>
+            <input style="display: none" type="file" id="file" (change)="getCreatePhoto($event)">
+          </form>
+    </div>
+
+  </div>
+  <div style="width: 38%"  class= "dib tl pb4 pl3">
+    <div class="black-40 f5 fw6 pb2  mt1">Title</div>
+    <input nz-input #title placeholder="Title of the Show" nzSize="default" />
+
+    <div class="black-40 f5 fw6 pb2  mt2">Description</div>
+    <textarea nz-input #des placeholder="Description" [nzAutosize]="{ minRows: 2, maxRows: 4 }"></textarea>
+
+    <div class="black-40 f5 fw6 pb2  mt1">Release Date</div>
+    <nz-date-picker [(ngModel)]="release" ></nz-date-picker>
+
+    <div class="black-40 f5 fw6 pb2  mt1">Genre</div>
+    <nz-select
+      [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder"
+      nzMode="multiple"
+      class="w-100 pointer h-10"
+      nzPlaceHolder="Select Appropriate Genre"
+      [(ngModel)]="listOfSelectedValue">
+      <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+    <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }} more selected </ng-template>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Artists</div>
+    <nz-select class="w-100" [(ngModel)]="listOfArtist" nzMode="tags" [nzTokenSeparators]="[',']"
+      [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Artist Name">
+      <nz-option *ngFor="let option of listOfArtist" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Directors</div>
+    <nz-select class="w-100" [(ngModel)]="listOfDirector" nzMode="tags" [nzTokenSeparators]="[',']"
+      [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Director's Name">
+      <nz-option *ngFor="let option of listOfDirector" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Producers</div>
+    <nz-select class="w-100" [(ngModel)]="listOfProducer" nzMode="tags" [nzTokenSeparators]="[',']"
+      [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Producers Name">
+      <nz-option *ngFor="let option of listOfProducer" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Writers</div>
+    <nz-select class="w-100" [(ngModel)]="listOfWriter" nzMode="tags" [nzTokenSeparators]="[',']"
+      [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Writers Name">
+      <nz-option *ngFor="let option of listOfWriter" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+  </div>
+  <ng-template #footer class="tc w-100">
+    <div *ngIf="!startUpdate" (click)="createShow(title.value,des.value)"
+      class="pointer dim bg-blue pa1 pl2 pr2 fw6 f4 white br-pill tc">Create</div>
+    <div *ngIf="startUpdate" class="blue  fw6  f5 tc w-100 pt3">Creating</div>
+    <nz-progress *ngIf="startUpdate" [nzPercent]="percentup" class="w-100 pb2" nzStatus="active"></nz-progress>
+    <div *ngIf="updated" class="green pl2  f5 tc w-100 pt3">Show Created Successfully</div>
+    <nz-progress *ngIf="updated" [nzPercent]="100" class=" fw6 pl2 w-90 tc pb2"></nz-progress>
+  </ng-template>
+
+</nz-modal>
+
+
+<nz-modal *md nz [nzFooter]="footer" nzWrapClassName="vertical-top-modal" [(nzVisible)]="visibleCreate"
+  nzTitle="Create Show" nzWidth="1050" class="" (nzOnCancel)="cancelCreate()" (nzOnOk)="okCreate()">
+  <div >
+    <div class=" f4 fw6 mb2">Show Poster</div>
+    <div class="ba b--black-10">
+      <img src="{{createPhoto}}" height="auto" width="100%" alt="Upload Poster" class="dib outline black-10" />
+      <form class="form-group">
+        <label for="file" style="border-radius:5px" class="dim pointer bg-blue white fw5 pa2 pr3 pl3 w-100 tc">
+          Upload Show's Poster
+        </label>
+        <input style="display: none" accept="image/x-png,image/gif,image/jpeg" type="file" id="file" (change)="getCreatePhoto($event)">
+      </form>
+    </div>
+
+  </div>
+  <div class="pt2">
+    <div class="black-40 f5 fw6 pb2  mt1">Title</div>
+    <input nz-input #title placeholder="{{userObj.uname}}" nzSize="default" />
+
+    <div class="black-40 f5 fw6 pb2  mt2">Description</div>
+    <textarea nz-input #des placeholder="Description" [nzAutosize]="{ minRows: 2, maxRows: 4 }"></textarea>
+
+    <div class="black-40 f5 fw6 pb2  mt1">Release Date</div>
+    <nz-date-picker class="w-100" [(ngModel)]="release" ></nz-date-picker>
+
+    <div class="black-40 f5 fw6 pb2  mt1">Genre</div>
+    <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple" class="w-100 pointer h-10"
+      nzPlaceHolder="Select Appropriate Genre" [(ngModel)]="listOfSelectedValue">
+      <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+    <ng-template #tagPlaceHolder let-selectedList>{{ selectedList.length }} more selected </ng-template>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Artists</div>
+    <nz-select class="w-100" [(ngModel)]="listOfArtist" nzMode="tags" [nzTokenSeparators]="[',']"
+     [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Artist Name">
+      <nz-option *ngFor="let option of listOfArtist" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Directors</div>
+    <nz-select class="w-100" [(ngModel)]="listOfDirector" nzMode="tags" [nzTokenSeparators]="[',']"
+     [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Director's Name">
+      <nz-option *ngFor="let option of listOfDirector" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Producers</div>
+    <nz-select class="w-100" [(ngModel)]="listOfProducer" nzMode="tags" [nzTokenSeparators]="[',']"
+     [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Producers Name">
+      <nz-option *ngFor="let option of listOfProducer" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+
+    <div class="black-40  f5 fw6 pb2  mt1">Writers</div>
+    <nz-select class="w-100" [(ngModel)]="listOfWriter" nzMode="tags" [nzTokenSeparators]="[',']"
+     [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder" nzPlaceHolder="Add Writers Name">
+      <nz-option *ngFor="let option of listOfWriter" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+    </nz-select>
+  </div>
+  <ng-template #footer class="tc w-100">
+    <div *ngIf="!startUpdate" (click)="createShow(title.value,des.value)"
+      class="pointer dim bg-blue pa1 pl2 pr2 fw6 f4 white br-pill tc">Create</div>
+    <div *ngIf="startUpdate" class="blue  fw6  f5 tc w-100 pt3">Creating</div>
+    <nz-progress *ngIf="startUpdate" [nzPercent]="percentup" class="w-100 pb2" nzStatus="active"></nz-progress>
+    <div *ngIf="updated" class="green pl2  f5 tc w-100 pt3">Show Created Successfully</div>
+    <nz-progress *ngIf="updated" [nzPercent]="100" class=" fw6 pl2 w-90 tc pb2"></nz-progress>
+  </ng-template>
+
+</nz-modal>

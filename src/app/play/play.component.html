@@ -1,0 +1,65 @@
+<div *lg style="width: 100%;overflow-y: scroll;height: 1000px" class="play">
+  <div class=" bg-black">
+    <div class="pa2 pt3 dib pointer dim  white fw6 f3" routerLink="/show/{{showObj.showid}}">
+      <nz-avatar [nzSize]="45" class="ba b--black-20" nzSrc="http://localhost:3000{{showObj.profile}}"></nz-avatar>
+      {{showTitle}} <span class="f5 light-gray fw4 pl3">{{showObj.followers.length}} Trackers</span>
+    </div>
+    <div style="padding-top:20px " class="pa3 fr dib pt3  white fw6 f5 ">
+      Season {{seasonObj.seasonNo+1}} <span class="bg-light-gray black  pa1 pr2 pl2">Episode {{episodeNumber}} </span>
+    </div>
+  </div>
+
+  <div class="bg-black" style="padding-left: 7.5%">
+    <div class="tc" style="width: 540px">
+      <video autoplay (playing)="addView()"style="outline:none;  "
+      width="300%" class="tc" controlsList="nodownload" controls preload="auto"
+      src="http://localhost:3000{{currentPlay.videoSrc}}" type="video/*"></video>
+    </div>
+  </div>
+
+  <div class="pa2 dib pl4 black fw6 f3">
+    {{currentPlay.title}}
+
+    <div class="f6 gray fw4 text-break w-80">
+      {{currentPlay.description}}
+    </div>
+  </div>
+    <div class="pa2 dib fr pr4 gray pl4  fw4  f2">
+      <span class="fw6 black">{{view}}</span> Views
+    </div>
+</div>
+
+
+<div *md style="width: 100%;overflow: scroll" class="">
+  <div class="w-100 bg-black">
+    <div class="dib pl2 pointer dim  pt2 white fw6 f5" routerLink="/show/{{showObj.showid}}">
+      <nz-avatar [nzSize]="45" class="ba  b--black-20" nzSrc="http://localhost:3000{{showObj.profile}}"></nz-avatar>
+      {{showTitle}}
+    </div>
+    <div class="pt2 pr2 fr dib white fw6 f5">{{showObj.followers}} follows</div>
+  </div>
+
+  <div class="w-100 ">
+    <div class="tc" style="width: 100%">
+      <video style="outline:none;  " height="auto" width="100%" class="tc" controlsList="nodownload" controls preload="auto"
+        src="http://localhost:3000{{currentPlay.videoSrc}}" type="video/*"></video>
+    </div>
+  </div>
+
+  <div class=" pl2  black fw6 f3">
+    {{currentPlay.title}}
+  </div>
+  <div class="bb pt2 pb2 pl2 b--black-10">
+    <div class="dib gray   fw4  f4">
+      <span class="fw6 black">{{currentStat.views}}</span> Views
+    </div>
+    <div style=" " class="pt1 fr dib  black fw6 f6 ">
+      Season {{seasonObj.seasonNo+1}} <span class="bg-light-gray black  pa1 pr2 pl2">Episode {{episodeNumber}} </span>
+    </div>
+  </div>
+
+  <div class="f6 pt2 pl2 gray fw4 text-break w-100">
+    {{currentPlay.description}}
+  </div>
+
+</div>

@@ -1,0 +1,98 @@
+<!--Desktop-->
+<div *lg style="overflow-x: hidden;">
+
+  <div style="background-color: rgb(0, 20, 51)" class="w-100 pa2 " >
+    <span routerLink="/" class="pointer dib v-mid white tc pr3 w-10" style="font-weight: 600;font-size: 33px;">
+      On<span class="" style="color: rgb(64, 177, 251)">wos</span>
+    </span>
+    <span class="dib v-mid w-30">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input  [nzAutocomplete]="auto" [(ngModel)]="inputValue"
+        placeholder="Search Shows or Users"
+        (keyup.enter)="goToResult()"
+        nz-input [ngModel]="inputValue" (input)="search($event)"/>
+        <ng-template #suffixIconSearch >
+          <i nz-icon [nzType]="status"></i>
+        </ng-template>
+      </nz-input-group>
+      <nz-autocomplete #auto>
+        <nz-auto-option
+        [routerLink]="option.type===1?'/profile/'+option.id:'/show/'+option.id"
+        *ngFor="let option of searchResult" [nzValue]="option.name">
+          <nz-avatar [routerLink]="option.type===1?'/profile/'+option.id:'/show/'+option.id" [nzSize]="50" class="ba b--black-20" nzSrc="http://localhost:3000{{option.avatar}}"></nz-avatar>
+          {{ option.name }}
+          <span class="global-search-item-count f5 fw6 fr">{{option.type===1?"User":"Show"}}</span>
+        </nz-auto-option>
+      </nz-autocomplete>
+
+    </span>
+    <span *ngIf="!login" class="dib v-mid fr tr  w-20" style="padding-top: 4px">
+      <button routerLink="/login"
+      nz-button nzType="link" class=""><span class="f5 white fw6">Login</span></button>
+      <button routerLink="/register" class="mt1 mr2" nz-button nzType="primary"  nzShape="round">
+        Create Account
+      </button>
+    </span>
+    <span *ngIf="login" class="dib v-mid fr tr pointer pr3" style="padding-top: 4px">
+      <span class="f5 white  pl2 fw6 " routerLink='/profile//{{userObj.userid}}'>
+        <nz-avatar [nzSize]="50  " class="ba b--black-20" nzSrc="http://localhost:3000{{userObj.photo}}"></nz-avatar>
+        {{userObj.uname}}
+      </span>
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        <i nz-icon nzType="down" style="color: aliceblue;font-size: 2.5vh" class=""></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item class="f4" routerLink='/profile//{{userObj.userid}}'>{{userObj.uname}}</li>
+          <li nz-menu-item class="f4" (click)="logout()">
+            <i nz-icon  class="ml2 black" style="color: aliceblue" nzType="logout" nzTheme="outline"></i>
+            Logout
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+    </span>
+  </div>
+  <div class="">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!--Mobile-->
+<div *md  style="width: 100%">
+  <div style="background-color: rgb(0, 20, 51)" class="pa2 bg-light-gray ">
+    <div class=" dib v-mid white f4 pa2  pl3 fw6" >
+      On<span class="" style="color: rgb(64, 177, 251)">wos</span>
+    </div>
+    <div class="dib v-mid fr " style="">
+          <span *ngIf="!login" class="dib v-mid" style="padding-top: 4px">
+            <button routerLink="/login" nz-button nzType="link" class=""><span class="f5 blue fw6">Login</span></button>
+            <button routerLink="/register" class="mt1 mr2" nz-button nzType="primary" nzShape="round">
+              Create Account
+            </button>
+          </span>
+          <span *ngIf="login" class="dib v-mid fr tr pointer " style="padding-top: 4px">
+            <span class="f6 white  pl2 fw6 " routerLink='/profile//{{userObj.userid}}'>
+              <nz-avatar [nzSize]="40  " class="ba pointer b--black-20" nzSrc="http://localhost:3000{{userObj.photo}}"></nz-avatar>
+            </span>
+            <a nz-dropdown [nzDropdownMenu]="menu">
+              <i nz-icon nzType="down" style="color: aliceblue;font-size: 2.5vh" class="pl2"></i>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li nz-menu-item class="f4" routerLink='/profile//{{userObj.userid}}'>{{userObj.uname}}</li>
+                <li nz-menu-item class="f4" (click)="logout()">
+                  <i nz-icon  class="ml2 black" style="color: aliceblue" nzType="logout" nzTheme="outline"></i>
+                  Logout
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+
+          </span>
+    </div>
+  </div>
+  <div style="" class="mt1 ">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

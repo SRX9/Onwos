@@ -21,9 +21,17 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
+              "./node_modules/swiper/css/swiper.min.css",
+              "./node_modules/tachyons/css/tachyons.min.css",
+              "src/theme.less",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,6 +128,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "show"
 }

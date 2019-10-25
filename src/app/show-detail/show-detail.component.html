@@ -1,0 +1,224 @@
+<div *lg class="media pa1" style="width: 100%">
+  <img src="http://localhost:3000{{showObj.poster}}"
+  class="" height="auto" width="33%" alt="...">
+  <div style="width: 67%;height: 91vh;overflow-y: scroll;overflow-x: hidden" class="pl3">
+    <h3 class="mt-0 f2 dib pr2">{{showObj.title}}</h3>
+    <button *ngIf="!homeuser && !fan" (click)="addFollow()"  nz-button class="dib " nzShape="round" [nzSize]="'large'" nzType="primary">Track</button>
+    <button *ngIf="!homeuser && fan"  (click)="addFollow()" nz-button class="dib " nzShape="round" [nzSize]="'large'" nzType="primary">&#10003; Tracking</button>
+    <span class="fr mr2">
+      by<span class="f3  pl2 fw6 pointer dim"  routerLink='/profile//{{showObj.userid}}'>
+     <nz-avatar [nzSize]="60  " class="ba b--black-20" nzSrc="http://localhost:3000{{showObj.profile}}"></nz-avatar>
+      {{showObj.uname}}
+    </span>
+    </span>
+    <div class="f3 fw7 ">
+    {{fans}} <span class="fw4 gray"> Trackers</span>
+    </div>
+    <div class="f4  fw6 black-40 mt3">
+      <div class="">Description</div>
+      <div style="white-space: pre-wrap;" class="f4 pt1 black w-50  text-break">
+        {{showObj.description}}
+      </div>
+    </div>
+    <div class="f4  fw6 black-40 mt3">
+      <div class="">Genre</div>
+      <div class="pt1">
+        <span class="fw5 gray ma1 " *ngFor="let i of showObj.genre;">
+          <span class="bg-black-10 f5 pb2 br-pill black pa1 pr2 pl2 ">{{i}}</span>
+        </span>
+      </div>
+    </div>
+    <div class="pa2 mt4">
+      <div class="row">
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Artist</div>
+              <nz-list style="height: 140px;overflow-y: scroll;overflow-x: hidden">
+                <nz-list-item *ngFor="let i of showObj.artist;">
+                  {{i}}
+                </nz-list-item>
+              </nz-list>
+        </div>
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Directors</div>
+          <nz-list style="height: 140px;overflow-y: scroll;overflow-x: hidden">
+            <nz-list-item *ngFor="let i of showObj.director;">
+              {{i}}
+            </nz-list-item>
+          </nz-list>
+        </div>
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Producers</div>
+          <nz-list style="height: 140px;overflow-y: scroll;overflow-x: hidden">
+            <nz-list-item *ngFor="let i of showObj.producer;">
+              {{i}}
+            </nz-list-item>
+          </nz-list>
+        </div>
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Writers</div>
+          <nz-list style="height: 140px;overflow-y: scroll;overflow-x: hidden">
+            <nz-list-item *ngFor="let i of showObj.writer;">
+              {{i}}
+            </nz-list-item>
+          </nz-list>
+        </div>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="f4 pb2 dib fw6 ">Seasons</div>
+    <button *ngIf="homeuser" nz-button class="dib fr" (click)="openCreate()" nzShape="round" [nzSize]="'default'" nzType="primary">+ Create New Season</button>
+    <div  class="w-100 ">
+      <h1 *ngIf="seasonArr.length===0; else elseBlock" class="black-30">No Seasons Started yet.</h1>
+      <ng-template #elseBlock>
+
+        <nz-card  class="pointer dim"  [nzTitle]="title"  class="dib" nzHoverable
+        *ngFor="let sug of seasonArr.slice().reverse();index as i" nzTitle={{sug.title}}
+          style="width:355px ;height: 540px">
+          <img alt="example" class="dim" routerLink="/season/{{sug.seasonid}}" src="http://localhost:3000{{sug.poster}}" height="420px"
+            width="100%" />
+            <div class="text-break pt1 tl f4 fw6">
+              {{sug.seasonTitle.slice(0,25)}}
+            </div>
+          <ng-template #title>
+            <span class="pl2" routerLink="/season/{{sug.seasonid}}">Season {{sug.seasonNo+1}}</span>
+          </ng-template>
+
+        </nz-card>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<nz-modal nz [nzFooter]="footer" [nzStyle]="{ top: '15px' }" [(nzVisible)]="showcreate" nzTitle="Launch New Season"
+  nzWidth="450" (nzOnCancel)="cancelCreate()" (nzOnOk)="cancelCreate()">
+  <div style="width: 100% ;" class=" ">
+    <div class=" f4 fw6 mb2">Show Poster</div>
+    <div class="ba b--black-10 tc">
+      <img src="{{seasonPhoto}}" height="450px" width="auto" alt="Upload Poster" class="dib outline black-10" />
+      <form class="form-group">
+        <label for="file" style="border-radius:5px" class="dim pointer bg-blue white fw5 pa2 pr3 pl3 w-100 tc">
+          Upload Season's Poster
+        </label>
+        <input style="display: none" type="file" id="file" (change)="getSeasonPhoto($event)">
+      </form>
+    </div>
+
+  </div>
+  <div style="width: 100%" class="tl  ">
+    <div class="black-40 f5 fw6 pb2  mt1">Season Title</div>
+    <input nz-input #title placeholder="Title of the Season" nzSize="default" />
+
+    <div class="black-40 f5 fw6 pb2  mt2">Description</div>
+    <textarea nz-input #des placeholder="Description" [nzAutosize]="{ minRows: 2, maxRows: 4 }"></textarea>
+
+    <div class="black-40 f5 fw6 pb2  mt1">Release Date</div>
+    <nz-date-picker [(ngModel)]="release" ></nz-date-picker>
+
+  </div>
+  <ng-template #footer class="tc w-100">
+    <div *ngIf="!startUpdate" (click)="createSeason(title.value,des.value)"
+      class="pointer dim bg-blue pa1 pl2 pr2 fw6 f4 white br-pill tc">Launch New Season</div>
+    <div *ngIf="startUpdate" class="blue  fw6  f5 tc w-100 pt3">Creating new season..</div>
+    <nz-progress *ngIf="startUpdate" [nzPercent]="percentup" class="w-100 pb2" nzStatus="active"></nz-progress>
+    <div *ngIf="updated" class="green pl2  f5 tc w-100 pt3">New season Created Successfully</div>
+    <nz-progress *ngIf="updated" [nzPercent]="100" class=" fw6 pl2 w-90 tc pb2"></nz-progress>
+  </ng-template>
+</nz-modal>
+
+
+
+
+<div *md class="" style="width: 100%">
+  <h3 class="mt-0 f4 dib pl1">
+    <nz-avatar [nzSize]="45" class="ba b--black-20" nzSrc="http://localhost:3000{{showObj.profile}}"></nz-avatar> {{showObj.title}}</h3>
+      <button *ngIf="!homeuser && !fan" (click)="addFollow()" nz-button class="dib fr mt2" nzShape="round" [nzSize]="'large'"
+        nzType="primary">Track</button>
+      <button *ngIf="!homeuser && fan" (click)="addFollow()" nz-button class="dib fr mt2 " nzShape="round" [nzSize]="'large'"
+        nzType="primary">&#10003; Tracking</button>
+  <img src="http://localhost:3000{{showObj.poster}}" class="align-self-center mr-3 " width="100%" height="auto" alt="...">
+  <div style="width:100%" class="pl2 mt3">
+    <span class="fr mr2">
+      by<span class="f3 pl1 fw6 dim" routerLink='/profile//{{showObj.userid}}'>
+        {{showObj.uname}}
+      </span>
+    </span>
+    <div class="f4 fw7 ">
+      {{fans}} <span class="fw4 gray">Trackers</span>
+    </div>
+    <div class="f5  fw6 black-40 mt3">
+      <div class="">Description</div>
+      <div style="white-space: pre-wrap;" class="f5 pt1 black w-90  text-break">
+        {{showObj.description}}
+      </div>
+    </div>
+    <div class="f4  fw6 black-30 mt3">
+      <div class="">Genre</div>
+      <div class="pt1">
+        <span class="fw5 gray ma1 " *ngFor="let i of showObj.genre;">
+          <span class="bg-black-10 f5 pb2 br-pill black pa1 pr2 pl2 ">{{i}}</span>
+        </span>
+      </div>
+    </div>
+    <div class="pa2 mt4">
+      <div class="row">
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Artist</div>
+          <nz-list style="max-height: 140px;overflow-y: scroll;overflow-x: hidden">
+            <nz-list-item *ngFor="let i of showObj.artist;">
+              {{i}}
+            </nz-list-item>
+          </nz-list>
+        </div>
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Directors</div>
+          <nz-list style="max-height: 140px;overflow-y: scroll;overflow-x: hidden">
+            <nz-list-item *ngFor="let i of showObj.director;">
+              {{i}}
+            </nz-list-item>
+          </nz-list>
+        </div>
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Producers</div>
+          <nz-list style="max-height: 140px;overflow-y: scroll;overflow-x: hidden">
+            <nz-list-item *ngFor="let i of showObj.producer;">
+              {{i}}
+            </nz-list-item>
+          </nz-list>
+        </div>
+        <div class="col-sm">
+          <div class="f4  fw6 black-70">Writers</div>
+          <nz-list style="max-height: 140px;overflow-y: scroll;overflow-x: hidden">
+            <nz-list-item *ngFor="let i of showObj.writer;">
+              {{i}}
+            </nz-list-item>
+          </nz-list>
+        </div>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="f4 pb2 dib fw6 ">Seasons</div>
+    <button nz-button class="dib fr" (click)="openCreate()" nzShape="round" [nzSize]="'default'" nzType="primary">+ Create
+      New Season</button>
+    <div class="w-100 ">
+      <h1 *ngIf="seasonArr.length===0; else elseBlock" class="black-30">No Seasons Started yet.</h1>
+      <ng-template #elseBlock>
+
+        <nz-card  class="pointer dim"  [nzTitle]="title" class="dib" nzHoverable *ngFor="let sug of seasonArr.slice().reverse();index as i"
+          nzTitle={{sug.title}} style="width:98.5%;height:auto">
+          <img alt="example"  class="dim" routerLink="/season/{{sug.seasonid}}" src="http://localhost:3000{{sug.poster}}" height="420px"
+            width="100%" height="auto"/>
+          <div class="text-break pt1 tl f4 fw6">
+            {{sug.seasonTitle.slice(0,25)}}
+          </div>
+          <ng-template #title>
+            <span class="pl2" routerLink="/season/{{sug.seasonid}}">Season {{sug.seasonNo+1}}</span>
+          </ng-template>
+
+        </nz-card>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+

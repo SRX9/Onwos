@@ -1,0 +1,75 @@
+<div *lg class="" style="background-image: url(assets/On.png);
+background-position: center;background-size: cover; width: 100%;
+height: 100vh;overflow: hidden ;">
+  <div class="content " style="width:20%">
+    <div style="border-radius: 5px" class="pa3 bg-white">
+      <form nz-form f class="login-form " style="width: 100%">
+        <div class="f2 pa2 tc black fw6">On<span class="blue">wos</span></div>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" #uname nz-input placeholder="Username">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" #pass nz-input placeholder="Password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="w-100">
+          <nz-form-control>
+            <button (click)="login(uname.value,pass.value)" style="width: 100%" nz-button class="login-form-button"
+              [nzType]="'primary'">Log in</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+    <nz-divider style="color: aliceblue" nzText="Dont have an Account?"></nz-divider>
+    <div style="border-radius: 5px" class="bg-white pa3">
+      <button style="width:100% " routerLink="/register" nz-button class="login-form-button" [nzType]="'primary'">Create
+        new account</button>
+    </div>
+
+</div>
+
+</div>
+
+<div *md class="bg-black" style="overflow:hidden;">
+  <div class="content " >
+    <div style="border-radius: 5px" class="">
+      <form nz-form f class="login-form ">
+        <div class="f2 pa2 tc black fw6">On<span class="blue">wos</span></div>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" #uname nz-input placeholder="Username">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" #pass nz-input placeholder="Password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="w-100">
+          <nz-form-control>
+            <button (click)="login(uname.value,pass.value)" style="width: 100%" nz-button class="login-form-button"
+              [nzType]="'primary'">Log in</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+    <nz-divider style="color: aliceblue" nzText="Dont have an Account?"></nz-divider>
+    <div style="border-radius: 5px" class="bg-white pa3">
+      <button style="width:100% " routerLink="/register" nz-button class="login-form-button" [nzType]="'primary'">Create
+        new account</button>
+    </div>
+
+  </div>
+
+</div>

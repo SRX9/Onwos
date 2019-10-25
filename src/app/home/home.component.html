@@ -1,0 +1,42 @@
+<div *lg style="overflow-x: hidden;height: 900px">
+      <!--Updates-->
+      <app-video-list></app-video-list>
+
+      <!--Top Picks For You-->
+      <div class="pt3 pl3">
+        <p class="f4 fw6 bb b--black-20 pb2 pl3 w-10">Recommendation</p>
+        <nz-card [nzTitle]="title"  class="dib" nzHoverable
+          *ngFor="let sug of suggesstion;" nzTitle={{sug.title}} style="width: 374px;height: 570px">
+          <img alt="example" class="dim" routerLink="/show/{{sug.showid}}"  src="http://localhost:3000{{sug.poster}}" height="440px" width="100%" />
+          <ng-template #title >
+            <nz-avatar routerLink="/profile/{{sug.userid}}" [nzSize]="45" class="ba b--black-20" nzSrc="http://localhost:3000{{sug.profile}}"></nz-avatar>
+            <span class="pl2" routerLink="/show/{{sug.showid}}">{{sug.title}}</span>
+            <span routerLink="/profile/{{sug.userid}}" class="fr  f5 pt2 gray fw6">
+              {{sug.uname}}
+            </span>
+          </ng-template>
+        </nz-card>
+      </div>
+
+</div>
+
+
+
+<div *md>
+    <!--Updates-->
+    <app-video-list></app-video-list>
+
+    <!--Top Picks For You-->
+    <div class="pt3" style="">
+      <p class="f6 fw6 bb pt2 pl2 b--black-20 pb2 w-30">You might like</p>
+        <nz-card [nzTitle]="title" class="dib" nzHoverable *ngFor="let sug of suggesstion" nzTitle={{sug.title}}
+          style="width: 100%;height:auto;">
+          <img alt="example" routerLink="/show/{{sug.showid}}" src="http://localhost:3000{{sug.poster}}" height="400px"
+            width="100%" height="auto" />
+          <ng-template #title>
+            <nz-avatar [nzSize]="45" class="ba b--black-20" nzSrc="http://localhost:3000{{sug.profile}}"></nz-avatar>
+            <span class="pl2" routerLink="/show/{{sug.showid}}">{{sug.title}}</span>
+          </ng-template>
+        </nz-card>
+    </div>
+  </div>

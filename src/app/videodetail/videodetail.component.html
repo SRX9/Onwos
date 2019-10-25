@@ -1,0 +1,21 @@
+<div *lg class="black pr6 bg-black  dib " style="width: auto;height: 400px;">
+      <span class="f5 pa2 fw6 tc dib white " style="padding-top: 11px;letter-spacing: 0.8%">
+        {{vid.title}}
+      </span>
+    <img
+      src={{vid.poster}}
+      class="card-img "
+      style="width: auto;height: 400px;"
+      alt="...">
+</div>
+
+
+<div *md class=" dib tl" style="width: 100%;height: auto;">
+  <span class="f5 fw7 dib pt2 pl2" style="letter-spacing: 0.8%">
+    {{vid.title}}
+  </span>
+  <span class="f6 ma1 dib mr2  fr">
+    <nz-avatar [nzSize]="35" class="ba bw1  b--light-gray" nzSrc={{vid.profile}}></nz-avatar> {{vid.user}}
+  </span>
+  <img src={{vid.poster}} class=" tc" style="width: 102%;height: 200px;" alt="...">
+</div>
