@@ -29,9 +29,10 @@ export class LoginComponent implements OnInit {
         password:pass
       }
       }).then((res) => {
+        console.log(res.data);
         if(res.data)
         {
-          localStorage.setItem('sxcv', uname);
+          localStorage.setItem('sxcvi', res.data.userid);
           this.loading=false;
           this.router.navigateByUrl('/')
         }else{

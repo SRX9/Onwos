@@ -1,62 +1,51 @@
 <!--Desktop-->
-<div *lg style="overflow-x: hidden;">
+    <nz-layout *lg>
+      <nz-header>
+        <div class="logo dib f3" style="color: white">
+          On<span class="" style="color: rgb(64, 177, 251)">wos</span>
+        </div>
+        <div class="dib light-gray v-mid ">
+          <i nz-icon class="white bl b--mid-gray pl2 " style="color: rgb(184, 184, 184);
+          font-size: 2.2vh" [nzType]="status"></i>
+        </div>
+        <div class=" dib v-mid w-30">
+          <nz-input-group class="">
+            <input  class="serach white pl2 " [(ngModel)]="inputValue" placeholder="Search"
+              (keyup.enter)="goToResult()"  [ngModel]="inputValue" (input)="search($event)" />
+          </nz-input-group>
+        </div>
+      </nz-header>
+      <nz-layout>
+        <nz-sider nzWidth="200px" nzTheme="dark">
+          <ul nz-menu nzTheme="dark" nzMode="inline" >
+            <li nz-menu-item  nzSelected>
+              <i nz-icon nzType="home"></i>
+              <span>Home</span>
+            </li>
+            <li nz-menu-item>
+              <i nz-icon nzType="video-camera"></i>
+              <span>Followed Shows</span>
+            </li>
+            <li nz-menu-item>
+              <i nz-icon nzType="book" nzTheme="outline"></i>
+              <span>Favorites</span>
+            </li>
+            <li nz-menu-item>
+              <i nz-icon nzType="rise" nzTheme="outline"></i>
+              <span>Trending</span>
+            </li>
+            <li nz-menu-item>
+              <i nz-icon nzType="trophy" nzTheme="outline"></i>
+              <span>Top</span>
+            </li>
+          </ul>
+        </nz-sider>
+        <nz-layout class="inner-layout shide" >
+          <nz-content style="background-color: rgb(0, 0, 0);">Content</nz-content>
+        </nz-layout>
+      </nz-layout>
+    </nz-layout>
 
-  <div style="background-color: rgb(0, 20, 51)" class="w-100 pa2 " >
-    <span routerLink="/" class="pointer dib v-mid white tc pr3 w-10" style="font-weight: 600;font-size: 33px;">
-      On<span class="" style="color: rgb(64, 177, 251)">wos</span>
-    </span>
-    <span class="dib v-mid w-30">
-      <nz-input-group [nzSuffix]="suffixIconSearch">
-      <input  [nzAutocomplete]="auto" [(ngModel)]="inputValue"
-        placeholder="Search Shows or Users"
-        (keyup.enter)="goToResult()"
-        nz-input [ngModel]="inputValue" (input)="search($event)"/>
-        <ng-template #suffixIconSearch >
-          <i nz-icon [nzType]="status"></i>
-        </ng-template>
-      </nz-input-group>
-      <nz-autocomplete #auto>
-        <nz-auto-option
-        [routerLink]="option.type===1?'/profile/'+option.id:'/show/'+option.id"
-        *ngFor="let option of searchResult" [nzValue]="option.name">
-          <nz-avatar [routerLink]="option.type===1?'/profile/'+option.id:'/show/'+option.id" [nzSize]="50" class="ba b--black-20" nzSrc="http://localhost:3000{{option.avatar}}"></nz-avatar>
-          {{ option.name }}
-          <span class="global-search-item-count f5 fw6 fr">{{option.type===1?"User":"Show"}}</span>
-        </nz-auto-option>
-      </nz-autocomplete>
-
-    </span>
-    <span *ngIf="!login" class="dib v-mid fr tr  w-20" style="padding-top: 4px">
-      <button routerLink="/login"
-      nz-button nzType="link" class=""><span class="f5 white fw6">Login</span></button>
-      <button routerLink="/register" class="mt1 mr2" nz-button nzType="primary"  nzShape="round">
-        Create Account
-      </button>
-    </span>
-    <span *ngIf="login" class="dib v-mid fr tr pointer pr3" style="padding-top: 4px">
-      <span class="f5 white  pl2 fw6 " routerLink='/profile//{{userObj.userid}}'>
-        <nz-avatar [nzSize]="50  " class="ba b--black-20" nzSrc="http://localhost:3000{{userObj.photo}}"></nz-avatar>
-        {{userObj.uname}}
-      </span>
-      <a nz-dropdown [nzDropdownMenu]="menu">
-        <i nz-icon nzType="down" style="color: aliceblue;font-size: 2.5vh" class=""></i>
-      </a>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu nzSelectable>
-          <li nz-menu-item class="f4" routerLink='/profile//{{userObj.userid}}'>{{userObj.uname}}</li>
-          <li nz-menu-item class="f4" (click)="logout()">
-            <i nz-icon  class="ml2 black" style="color: aliceblue" nzType="logout" nzTheme="outline"></i>
-            Logout
-          </li>
-        </ul>
-      </nz-dropdown-menu>
-
-    </span>
-  </div>
-  <div class="">
-    <router-outlet></router-outlet>
-  </div>
-</div>
 
 <!--Mobile-->
 <div *md  style="width: 100%">

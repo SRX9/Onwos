@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
           if(res.data)
           {
             this.loading=false;
-            localStorage.setItem('sxcv', uname);
+            localStorage.setItem('sxcvi', res.data.userid);
             this.router.navigateByUrl('/')
           }
           else{

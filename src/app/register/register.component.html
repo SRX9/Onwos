@@ -1,34 +1,38 @@
-<div *lg style="background-image: url(assets/On.png);
+<div *lg >
+
+  <div style="background-image: url(assets/On.png);
 background-position: center;background-size: cover; width: 100%;
-height: 100vh;overflow: hidden ;">
-  <div class="content "  style="width:20%">
+height: 900px;overflow-y: hidden ;">
+  <div class="content " style="width:20%">
     <div style="border-radius: 5px" class="bg-white pa3">
       <form nz-form f class="login-form " style="width: 100%">
         <div class="f2 pa2 tc black fw6">On<span class="blue">wos</span></div>
-            <form class="form-group">
-              <label for="file" style="border-radius:5px;width: 100%" class="tc">
-                  <nz-avatar nzIcon="user-add"
-                  nzSrc="{{tempPhoto}}"
-                  class="dim pointer "
-                  [nzSize]="80" [nzShape]="'round'"></nz-avatar>
-                  <div class="f6 fw5 gray pt2 ">Upload Profile</div>
-              </label>
-              <input style="display: none" type="file" accept="image/x-png,image/gif,image/jpeg" id="file" (change)="getProfilePhoto($event)">
-            </form>
-            <nz-form-item style="width: 184%">
-              <nz-form-control nzErrorTip="{{help}}" [nzSpan]="13" nzValidateStatus="{{Validate}}" nzHasFeedback>
-                <input #uname (input)="checkUser($event)" style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px"
-                  type="text" nz-input placeholder="Username">
-              </nz-form-control>
-            </nz-form-item>
+        <form class="form-group">
+          <label for="file" style="border-radius:5px;width: 100%" class="tc">
+            <nz-avatar nzIcon="user-add" nzSrc="{{tempPhoto}}" class="dim pointer " [nzSize]="80" [nzShape]="'round'">
+            </nz-avatar>
+            <div class="f6 fw5 gray pt2 ">Upload Profile</div>
+          </label>
+          <input style="display: none" type="file" accept="image/x-png,image/gif,image/jpeg" id="file"
+            (change)="getProfilePhoto($event)">
+        </form>
+        <nz-form-item style="width: 184%">
+          <nz-form-control nzErrorTip="{{help}}" [nzSpan]="13" nzValidateStatus="{{Validate}}" nzHasFeedback>
+            <input #uname (input)="checkUser($event)" style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px"
+              type="text" nz-input placeholder="Username">
+          </nz-form-control>
+        </nz-form-item>
 
 
-            <input #pass style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px" type="" type="password" nz-input placeholder="Password" />
-            <textarea #bio style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px"  nz-input rows="2" placeholder="Bio"></textarea>
-            <button [nzLoading]="loading" (click)="register(uname.value,pass.value,bio.value)" style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px"
-            nz-button class="login-form-button" [nzType]="'primary'">
-              Create new account
-          </button>
+        <input #pass style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px" type="" type="password" nz-input
+          placeholder="Password" />
+        <textarea #bio style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px" nz-input rows="2"
+          placeholder="Bio"></textarea>
+        <button [nzLoading]="loading" (click)="register(uname.value,pass.value,bio.value)"
+          style="margin: 2%;margin-bottom: 4%; width:100%;margin-left: -3px" nz-button class="login-form-button"
+          [nzType]="'primary'">
+          Create new account
+        </button>
       </form>
     </div>
     <nz-divider style="color: rgb(255, 255, 255)" nzText="Already a member?"></nz-divider>
@@ -38,6 +42,12 @@ height: 100vh;overflow: hidden ;">
     </div>
   </div>
 </div>
+
+</div>
+
+
+
+
 <div *md class="bg-black"
   style="">
   <div class="content bg-white" style="border-radius: 5px">

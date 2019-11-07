@@ -16,7 +16,8 @@ export class MainComponent {
   user;
   userObj;
   login=false;
-  constructor(private router: Router,) { }
+
+  constructor(private router: Router) { }
   ngOnInit(){
 
     if (localStorage.getItem("sxcv")!==null)
@@ -33,16 +34,15 @@ export class MainComponent {
         localStorage.setItem('sxcvi',response.data.userid);
       });
     }
+
     const numbers = interval(1000);
-
     const takeFourNumbers = numbers.pipe(take(86400));
-
     takeFourNumbers.subscribe(x => {
-      if (localStorage.getItem("sxcv") != null) {
+      if (localStorage.getItem("sxcvi") != null) {
         this.login = true;
-        axios.get('http://localhost:3002/getProfileByName', {
+        axios.get('http://localhost:3002/getProfile', {
           params: {
-            uname: localStorage.getItem("sxcv")
+            userid: localStorage.getItem("sxcvi")
           }
         }).then((response) => {
           localStorage.setItem('sxcvi', response.data.userid);

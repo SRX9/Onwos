@@ -1,0 +1,40 @@
+.shide::-webkit-scrollbar { width: 0 !important }
+.shide { overflow: -moz-scrollbars-none; }
+.shide { -ms-overflow-style: none; }
+
+
+    .header-menu {
+        line-height: 64px;
+      }
+
+      .sider-menu {
+        height: 100%;
+        border-right: 0;
+      }
+
+      .inner-layout {
+        overflow: scroll;
+        overflow-x: hidden;
+      }
+
+      nz-content {
+        background: #fff;
+        height: 91.7vh;
+      }
+.logo {
+        width: 120px;
+        font-size: 3vh;
+        height: 31px;
+        margin: 0px 30px 16px 0px;
+        float: left;
+      }
+
+.serach{
+  background-color: rgb(0, 25, 29);
+  border:none;
+  font-size: 2vh
+}
+
+input:focus {
+    outline:none;
+}
