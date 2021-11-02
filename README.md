@@ -10,6 +10,27 @@ Some Snapshots of the webapp:
 <img src = "https://lh3.googleusercontent.com/d/1qOsReOXTb1U_0KG5JOZxMHXd7Ve6GlR2" width = 100%>
 
 
+Tech Stack:
+• JavaScript
+
+• TypeScript
+
+• Node.js
+
+• Angular
+
+• Express.js
+
+• AWS
+
+• SQL Server
+
+• MongoDB
+
+• Bootstrap
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
