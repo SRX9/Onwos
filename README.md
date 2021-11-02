@@ -3,7 +3,7 @@
 A webapp for on demand streaming of various web series. Also anyone can create thier own series with different seasons. 
 
 Some Snapshots of the webapp:
-<img src = "https://drive.google.com/thumbnail?id=15eFKvvD2A4ZQGLnReoVWjqha_p7pdb4w" width = 100%>
+<img src = "https://lh3.googleusercontent.com/d/15eFKvvD2A4ZQGLnReoVWjqha_p7pdb4w" width = 100%>
 
 
 ## Development server
